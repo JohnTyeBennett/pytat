@@ -1,25 +1,25 @@
 from csv  import DictReader, DictWriter
 from json import loads, dumps
 
+class Metadata(object):
+
+    @classmethod
+    def from_string(cls, s):
+        values = loads(s)
+        obj = cls()
+        for key in values.keys():
+            setattr(obj, key, values[key])
+        return obj
+
+    def __str__(self):
+        return dumps(self.__dict__)
+
 class Store(object):
-
-    class Metadata(object):
-
-        @classmethod
-        def from_string(cls, s):
-            values = loads(s)
-            obj = cls()
-            for key in values.keys():
-                setattr(obj, key, values[key])
-            return obj
-
-        def __str__(self):
-            return dumps(self.__dict__)
 
     def __init__(self, cls):
         self.cls      = cls
         self.entries  = []
-        self.metadata = self.Metadata()
+        self.metadata = Metadata()
 
     fields = ()
     values_to_objects = {}
@@ -91,7 +91,7 @@ class Store(object):
         pos = input.tell()
         line = input.readline()
         if line.startswith('{'):
-            return self.Metadata.from_string(line)
+            return Metadata.from_string(line)
         else:
             input.seek(pos)
             return None
