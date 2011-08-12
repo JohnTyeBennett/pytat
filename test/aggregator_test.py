@@ -1,6 +1,6 @@
 import unittest
 
-from pytat.aggregator import Aggregator, ListAccumulator, MaxAccumulator, MinAccumulator, MeanAccumulator, object_key
+from pytat.aggregator import *
 
 class AggregatorTest(unittest.TestCase):
 
@@ -19,6 +19,27 @@ class AggregatorTest(unittest.TestCase):
                 ((1, 2), [(1, 2, 3), (1, 2, 4), (1, 2, 5)]),
                 ((2, 1), [(2, 1, 3), (2, 1, 4)]),
                 ((3, 1), [(3, 1, 2)])
+            ],
+            aggregated_items
+        )
+
+    def test_aggregate_count(self):
+        items = [
+            (1, 0),
+            (1, 3),
+            (1, 2),
+            (2, 1),
+            (3, 4),
+            (3, 1),
+            (2, 2),
+            (1, 1)
+        ]
+        aggregated_items = Aggregator(lambda x: x[0], CountAccumulator).aggregate(items)
+        self.assertEqual(
+            [
+                (1, 4),
+                (2, 2),
+                (3, 2)
             ],
             aggregated_items
         )

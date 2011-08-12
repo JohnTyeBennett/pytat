@@ -6,6 +6,18 @@ class Accumulator(object):
     def accumulate(self, item): pass
     def final_value(self): pass
 
+class CountAccumulator(Accumulator):
+
+    def __init__(self):
+        super(CountAccumulator, self).__init__()
+        self.count = 0
+
+    def accumulate(self, item):
+        self.count += 1
+
+    def final_value(self):
+        return self.count
+
 class ListAccumulator(Accumulator):
 
     def __init__(self):
