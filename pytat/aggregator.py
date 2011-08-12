@@ -46,7 +46,7 @@ class MinAccumulator(Accumulator):
 
 class Aggregator(object):
 
-    def __init__(self, key_func, accumulator_class):
+    def __init__(self, key_func, accumulator_class = ListAccumulator):
         self.key_func = key_func
         self.accumulator_class = accumulator_class
 
