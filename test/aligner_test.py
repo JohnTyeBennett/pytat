@@ -9,14 +9,7 @@ class AlignerTest(unittest.TestCase):
         ys = [(0, 1), (2, 8), (3, 6), (5, 5), (6, 4), (7, 1)]
         zs = []
         ws = [(5, 1)]
-        align_add(
-            lambda x: x[0],
-            lambda key: (key, 0),
-            xs,
-            ys,
-            zs,
-            ws
-        )
+        align_add(lambda x: x[0], lambda key: (key, 0), xs, ys, zs, ws)
         self.assertEqual([(0, 0), (1, 3), (2, 1), (3, 0), (4, 7), (5, 9), (6, 0), (7, 0)], xs)
         self.assertEqual([(0, 1), (1, 0), (2, 8), (3, 6), (4, 0), (5, 5), (6, 4), (7, 1)], ys)
         self.assertEqual([(0, 0), (1, 0), (2, 0), (3, 0), (4, 0), (5, 0), (6, 0), (7, 0)], zs)

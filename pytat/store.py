@@ -87,7 +87,8 @@ class Store(object):
         with open(filename, 'w') as f:
             self.save(f)
 
-    def read_metadata(self, input):
+    @classmethod
+    def read_metadata(cls, input):
         pos = input.tell()
         line = input.readline()
         if line.startswith('{'):
@@ -96,6 +97,7 @@ class Store(object):
             input.seek(pos)
             return None
 
-    def read_metadata_from_file(self, filename):
+    @classmethod
+    def read_metadata_from_file(cls, filename):
         with open(filename) as f:
-            return self.read_metadata(f)
+            return cls.read_metadata(f)
