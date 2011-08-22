@@ -143,9 +143,12 @@ class DateTime:
     def truncate_to(self, unit = MINUTE):
         return self.from_tuple(self.__to_tuple()[0:self.__FIELD_INDEXES[unit] + 1])
 
-    def plus(self, unit = SECOND, num = 1):
+    def plus(self, num = 1, unit = SECOND):
         t = self.__timestamp + self.__UNIT_IN_SECONDS[unit] * num
         return self.__from_timestamp(t)
+
+    def julian_day(self):
+        return self.__timestamp / 24.0 / 60.0 / 60.0 - 0.5
 
     def __cmp__(self, other):
         if not other:
